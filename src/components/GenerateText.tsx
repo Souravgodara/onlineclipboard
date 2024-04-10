@@ -10,7 +10,6 @@ export default function GenerateText() {
   const [text, setText] = useState(null);
   const { toast } = useToast();
   async function getClipboard(formData: FormData) {
-    console.log("btn clicke");
     const schema = z.object({
       code: z
         .number({
@@ -26,7 +25,6 @@ export default function GenerateText() {
     });
 
     if (!validatedFields.success) {
-      console.log("error");
       toast({
         title: "Validation Failed",
         description: "Enter 4 Digits Valid Code",

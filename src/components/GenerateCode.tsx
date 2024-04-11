@@ -21,6 +21,7 @@ export default function GenerateCode() {
       code: Math.floor(Math.random() * 9000) + 1000,
     });
     if (!validatedFields.success) {
+      console.log(validatedFields.error.message);
       return {
         errors: validatedFields.error.flatten().fieldErrors,
       };

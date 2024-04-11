@@ -9,7 +9,6 @@ export default async function generateText(validatedFields: validatedFields) {
   try {
     await connectDB();
     const res = await Text.find({ code: validatedFields.code });
-    console.log({ res });
     if (res) {
       return { success: true, data: res[0].data };
     } else {

@@ -28,6 +28,7 @@ export default function GenerateText() {
       toast({
         title: "Validation Failed",
         description: "Enter 4 Digits Valid Code",
+        variant: "destructive",
       });
       return {
         errors: validatedFields.error.flatten().fieldErrors,
@@ -40,6 +41,7 @@ export default function GenerateText() {
       toast({
         title: "Code Invalid",
         description: "Please enter a valid code",
+        variant: "destructive",
       });
     }
   }

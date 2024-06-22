@@ -5,9 +5,11 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import generateText from "@/app/actions/generate-text-action";
 import { useToast } from "./ui/use-toast";
+import Loading from "./loading";
 
 export default function GenerateText() {
   const [text, setText] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   async function getClipboard(formData: FormData) {
     const schema = z.object({
@@ -36,6 +38,7 @@ export default function GenerateText() {
     }
     const { success, data } = await generateText(validatedFields.data);
     if (success) {
+      setLoading(false);
       setText(data);
     } else {
       toast({
@@ -50,12 +53,16 @@ export default function GenerateText() {
       <form action={async (formData) => await getClipboard(formData)}>
         <div className='flex flex-col gap-4 justify-center items-center mt-8'>
           <Input name='code' placeholder='Enter Generated Code Here' />
-          <Button type='submit' className='w-fit'>
+          <Button
+            onClick={() => setLoading(true)}
+            type='submit'
+            className='w-fit'>
             Get Clipboard
           </Button>
         </div>
       </form>
       <div className='text-center text-white mt-4'>
+        {loading && <Loading />}
         {text && <div>{text}</div>}
       </div>
     </main>
